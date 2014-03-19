@@ -11,3 +11,24 @@ TypeHinting::initialize();
 If there is any other error then you get an InvalidArgumentException by default. You can change this behavior by overwriting the "handle_error" function in a subclass.
 
 Thanks to [daniel.l.wood(at)gmail.com](http://www.php.net/manual/en/language.oop5.typehinting.php#83442) for the inspiration on php.net.
+
+Examples
+----------------
+```PHP
+class Foo {
+  public function plus( numeric $a, numeric $b ) {
+    return (float) $a + (float) $b;
+  }
+  
+  public function hello( string $name ) {
+    return "Hello {$name}!";
+  }
+}
+
+$foo = new Foo;
+$foo->plus( 5, "-7" ); // returns -2.0
+$foo->plus( 4.3, "foo" ); // throws InvalidArgumentException for argument 2
+
+$foo->hello( "Peter" ); // returns "Hello Peter!"
+$foo->hello( 5 ); // throws InvalidArgumentException
+```
